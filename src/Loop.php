@@ -43,6 +43,12 @@ class Loop
             $this->loopInterruptionSignals = $loopInterruptionSignals;
         }
     }
+    
+    public function __destruct() 
+    {
+        // @todo: implement detach
+        // $this->signalDispatcher->detachHandler($signal);
+    }
 
     /**
      * Add loop interruption handler for passed signals

@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Sokil\Worker;
+namespace Sokil\Worker\Loop;
 
 use Sokil\Worker\Signal\SignalDispatcherInterface;
-use Sokil\Worker\Tick\TickInterface;
 
 class Loop
 {
@@ -43,42 +42,45 @@ class Loop
             $this->loopInterruptionSignals = $loopInterruptionSignals;
         }
     }
-    
-    public function __destruct() 
+
+    /**
+     * Stop iterating loop
+     */
+    public function interruptLoop()
     {
-        // @todo: implement detach
-        // $this->signalDispatcher->detachHandler($signal);
+        $this->isLoopInterrupted = true;
     }
 
     /**
-     * Add loop interruption handler for passed signals
+     * @param LoopTickInterface $tick
      */
-    private function attachLoopInterruptionSignalHandler(): void
+    public function run(LoopTickInterface $tick)
     {
+        // attach signal handlers to stop loop
         foreach ($this->loopInterruptionSignals as $loopInterruptionSignal) {
-            $this->signalDispatcher->attachHandler(
+            $this->signalDispatcher->addListener(
                 $loopInterruptionSignal,
-                function() {
-                    $this->isLoopInterrupted = true;
-                }
+                [$this, 'interruptLoop']
             );
         }
-    }
 
-    public function attachSignalHandler(int $signal, callable $handler): void
-    {
-        $this->signalDispatcher->attachHandler($signal, $handler);
-    }
-
-    /**
-     * @param TickInterface $tick
-     */
-    public function run(TickInterface $tick)
-    {
-        $this->attachLoopInterruptionSignalHandler();
-
+        // run loop
         while (!$this->isLoopInterrupted) {
-            $tick->execute();
+            // execute tick
+            $continueLoop = $tick->execute();
+
+            // check if interruption required
+            if ($continueLoop === false) {
+                $this->interruptLoop();
+            }
+        }
+
+        // detach signal handlers to stop loop
+        foreach ($this->loopInterruptionSignals as $loopInterruptionSignal) {
+            $this->signalDispatcher->removeListener(
+                $loopInterruptionSignal,
+                [$this, 'interruptLoop']
+            );
         }
     }
 }

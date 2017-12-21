@@ -10,7 +10,13 @@ interface SignalDispatcherInterface
 {
     /**
      * @param int $signal
-     * @param callable $handler
+     * @param callable $listener
      */
-    public function attachHandler(int $signal, callable $handler): void;
+    public function addListener(int $signal, $listener): void;
+
+    /**
+     * @param int $signal
+     * @param callable $listener
+     */
+    public function removeListener(int $signal, $listener): void;
 }

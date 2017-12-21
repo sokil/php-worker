@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Sokil\Worker\Tick;
+namespace Sokil\Worker\Loop;
 
-interface TickInterface
+interface LoopTickInterface
 {
     public function execute();
 }

@@ -57,8 +57,8 @@ class SignalNumber
     /**
      * @return int[]
      */
-    public static function getUnblockable() : array
-    {
-        return [self::SIGKILL, self::SIGSTOP];    
-    }
+    public const UNBLOCABLE_SIGNALS = [
+        self::SIGKILL, 
+        self::SIGSTOP,   
+    ];
 }

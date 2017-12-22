@@ -16,7 +16,7 @@ class SignalDispatcher implements SignalDispatcherInterface
     public function __construct()
     {
         for ($signal = 1; $signal <= 31; $signal++) {
-            if (in_array($signal, [SignalNumber::SIGKILL, SignalNumber::SIGSTOP])) {
+            if (in_array($signal, SignalNumber::UNBLOCABLE_SIGNALS)) {
                 // SIGKILL/SIGSTOP not allowed to be redefined
                 continue;
             }

@@ -17,6 +17,11 @@ class SignalNumber
     public const SIGIOT = 6;
     public const SIGBUS = 7;
     public const SIGFPE = 8;
+    
+    /**
+     * Kill (POSIX)
+     * Unblockable
+     */
     public const SIGKILL = 9;
     public const SIGUSR1 = 10;
     public const SIGSEGV = 11;
@@ -28,6 +33,11 @@ class SignalNumber
     public const SIGCLD = 17;
     public const SIGCHLD = 17;
     public const SIGCONT = 18;
+    
+    /**
+     * Stop (POSIX)
+     * Unblockable
+     */
     public const SIGSTOP = 19;
     public const SIGTSTP = 20;
     public const SIGTTIN = 21;
@@ -43,4 +53,12 @@ class SignalNumber
     public const SIGPWR = 30;
     public const SIGSYS = 31;
     public const SIGBABY = 31;
+    
+    /**
+     * @return int[]
+     */
+    public statis function getUnblockable() : array
+    {
+        return [self::SIGKILL, self::SIGSTOP];    
+    }
 }

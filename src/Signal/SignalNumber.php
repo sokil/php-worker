@@ -15,6 +15,12 @@ class SignalNumber
      * Ctrl+C in console
      */
     public const SIGINT = 2;
+    
+    /**
+     * Quit (POSIX)
+     * By default, this causes the process to terminate and dump core.
+     * Ctrl-\ in console
+     */
     public const SIGQUIT = 3;
     public const SIGILL = 4;
     public const SIGTRAP = 5;
@@ -47,7 +53,8 @@ class SignalNumber
     
     /**
      * Keyboard stop (POSIX)
-     * By default, this causes the process to suspend execution
+     * By default, this causes the process to suspend execution.
+     * Use 'fg' to resume it in the foreground, and make it the current job.
      * Ctrl-Z in console
      */
     public const SIGTSTP = 20;

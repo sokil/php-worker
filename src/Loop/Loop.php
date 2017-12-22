@@ -22,7 +22,7 @@ class Loop
      */
     private $loopInterruptionSignals = [
         SIGINT, // Ctrl+C in console
-        SIGTERM, // Graceful termination by supervisor
+        SIGTERM, // Default graceful termination signal of supervisor
         SIGHUP,
         SIGUSR1,
     ];

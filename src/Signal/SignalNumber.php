@@ -9,6 +9,11 @@ namespace Sokil\Worker\Signal;
 class SignalNumber
 {
     public const SIGHUP = 1;
+    
+    /**
+     * Interrupt (ANSI)
+     * Ctrl+C in console
+     */
     public const SIGINT = 2;
     public const SIGQUIT = 3;
     public const SIGILL = 4;
@@ -39,6 +44,12 @@ class SignalNumber
      * Unblockable
      */
     public const SIGSTOP = 19;
+    
+    /**
+     * Keyboard stop (POSIX)
+     * By default, this causes the process to suspend execution
+     * Ctrl-Z in console
+     */
     public const SIGTSTP = 20;
     public const SIGTTIN = 21;
     public const SIGTTOU = 22;

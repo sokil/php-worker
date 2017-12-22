@@ -58,7 +58,7 @@ class SignalDispatcher implements SignalDispatcherInterface
     /**
      * @param int $signal
      */
-    private function callSignalHandlers(int $signal)
+    private function callSignalHandlers(int $signal): void
     {
         if (empty($this->signalListeners[$signal])) {
             return;
@@ -77,5 +77,19 @@ class SignalDispatcher implements SignalDispatcherInterface
         pcntl_signal_dispatch();
     }
 
+    /**
+     * @param callable $listener
+     */
+    public function addTickListener($listener): void
+    {
+        register_tick_function($listener);
+    }
 
+    /**
+     * @param callable $listener
+     */
+    public function removeTickListener($listener): void
+    {
+        unregister_tick_function($listener);
+    }
 }

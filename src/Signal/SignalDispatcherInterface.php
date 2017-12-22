@@ -19,4 +19,9 @@ interface SignalDispatcherInterface
      * @param callable $listener
      */
     public function removeListener(int $signal, $listener): void;
+
+    /**
+     * Call signal handlers for pending signals
+     */
+    public function dispatchSignals() : void;
 }

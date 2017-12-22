@@ -21,7 +21,7 @@ class SignalDispatcher implements SignalDispatcherInterface
                 continue;
             }
 
-            pcntl_signal($signal, [$this, 'dispatchSignal']);
+            pcntl_signal($signal, [$this, 'callSignalHandlers']);
         }
     }
 
@@ -58,7 +58,7 @@ class SignalDispatcher implements SignalDispatcherInterface
     /**
      * @param int $signal
      */
-    private function dispatchSignal(int $signal)
+    private function callSignalHandlers(int $signal)
     {
         if (empty($this->signalListeners[$signal])) {
             return;
@@ -68,4 +68,14 @@ class SignalDispatcher implements SignalDispatcherInterface
             call_user_func($signalListener, $signal);
         }
     }
+
+    /**
+     * Calls signal handlers for pending signals
+     */
+    public function dispatchSignals(): void
+    {
+        pcntl_signal_dispatch();
+    }
+
+
 }

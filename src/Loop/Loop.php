@@ -65,7 +65,15 @@ class Loop
         }
 
         // run loop
-        while (!$this->isLoopInterrupted) {
+        while (true) {
+            // dispatch signals
+            $this->signalDispatcher->dispatchSignals();
+
+            // check if loop was interrupted
+            if ($this->isLoopInterrupted) {
+                break;
+            }
+
             // execute tick
             $continueLoop = $tick->execute();
 

@@ -57,7 +57,7 @@ class SignalNumber
     /**
      * @return int[]
      */
-    public statis function getUnblockable() : array
+    public static function getUnblockable() : array
     {
         return [self::SIGKILL, self::SIGSTOP];    
     }

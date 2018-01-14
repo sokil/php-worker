@@ -1,5 +1,7 @@
 # Worker
 
+## Useful links
+
 * [Process Control Extensions. PHP Manual](http://php.net/manual/en/refs.fileprocess.process.php)
 * [Stream](http://php.net/manual/ru/book.stream.php)
 * Pthreads

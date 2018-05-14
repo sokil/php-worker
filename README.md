@@ -11,5 +11,6 @@
   * [The Pht Threading Extension](https://github.com/tpunt/pht)
 * Async IO
   * [EIO](http://php.net/manual/en/intro.eio.php)
+  * [Swoole](https://github.com/swoole/swoole-src)
 * Event loop:
   * [EV](http://php.net/manual/en/intro.ev.php)
